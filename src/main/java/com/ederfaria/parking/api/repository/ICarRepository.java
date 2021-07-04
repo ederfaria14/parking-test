@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
  *
  * @author eder
  */
-public interface ICarRepository  extends JpaRepository<Car, Long>, JpaSpecificationExecutor {
+public interface ICarRepository extends JpaRepository<Car, Long>, JpaSpecificationExecutor {
 
 //    @Transactional(readOnly = true)
 //    @Query(value = "SELECT _name FROM certificate WHERE TRUE order by _name", nativeQuery = true)
@@ -20,5 +20,7 @@ public interface ICarRepository  extends JpaRepository<Car, Long>, JpaSpecificat
 
     @Transactional
     Long deleteByColor(String color);
+
+    Car readById(Long id);
 
 }

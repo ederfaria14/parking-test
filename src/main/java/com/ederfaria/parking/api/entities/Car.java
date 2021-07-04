@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -21,12 +23,26 @@ public class Car implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+
+    @NotEmpty(message = "Name can't be empty")
+    @NotNull(message = "Name can't be null")
     @Column(name = "_name", nullable = false, length = 250)
     private String name;
+
+
+    @NotEmpty(message = "Name can't be empty")
+    @NotNull(message = "Number can't be null")
     @Column(name = "color", nullable = false, length = 50)
     private String color;
+
+    @NotEmpty(message = "Plaque can't be empty")
+    @NotNull(message = "Plaquecan't be null")
     @Column(name = "plaque", nullable = false, length = 50)
     private String plaque;
+
+    @NotEmpty(message = "Mark can't be empty")
+    @NotNull(message = "Mark can't be null")
     @Column(name = "mark", nullable = false, length = 50)
     private String mark;
 

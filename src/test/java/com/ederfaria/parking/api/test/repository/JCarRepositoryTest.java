@@ -5,7 +5,6 @@ import com.ederfaria.parking.api.repository.ICarRepository;
 import java.util.ArrayList;
 import java.util.List;
 import org.assertj.core.api.Assertions;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,9 +27,9 @@ public class JCarRepositoryTest {
 
     @Before
     public void preTest() {
-        List<Car>list = new ArrayList<>();
+        List<Car> list = new ArrayList<>();
         for (int i = 1; i <= 100; i++) {
-            Car entity = new Car("Monza-"+i, "Prata", "GMO 8842", "GM");
+            Car entity = new Car("Monza-" + i, "Prata", "GMO 8842", "GM");
             list.add(entity);
         }
         repository.saveAll(list);
@@ -38,9 +37,10 @@ public class JCarRepositoryTest {
 
     @Test
     public void create() {
+        System.out.println("\n\n===================== CREATE ==========================================");
         Car entity = new Car("Monza", "Prata", "GMO 8842", "GM");
         repository.save(entity);
-        
+
         Assertions.assertThat(entity.getId()).isNotNull();
         Assertions.assertThat(entity.getName()).isEqualTo("Monza");
         Assertions.assertThat(entity.getColor()).isEqualTo("Prata");
@@ -49,10 +49,16 @@ public class JCarRepositoryTest {
 
     @Test
     public void notCreate() {
-//        Car entity = new Car(null,null,null,null);
-  //      entity = repository.save(entity);
-        
-    //    Assertions.assertThat(entity.getId()).isNotNull();
+        System.out.println("\n\n===================== NOT CREATE=======================================");
+        Car entity = new Car(null, null, null, null);
+        entity = repository.save(entity);
+
+//        if (entity != null && entity.getId() != null) {
+  //          Car carById = repository.readById(entity.getId());
+    //        Assertions.assertThat(carById).isNull();
+    //    }
+
+        //Assertions.assertThat(entity).isNull();
 //        Assertions.assertThat(entity.getName()).isEqualTo("Monza");
 //        Assertions.assertThat(entity.getColor()).isEqualTo("Prata");
 //        Assertions.assertThat(entity.getMark()).isEqualTo("GM");
@@ -60,22 +66,20 @@ public class JCarRepositoryTest {
 
     @Test
     public void read() {
+        System.out.println("\n\n===================== READ ============================================");
         List<Car> list = repository.findAll();
-        System.out.println("========================================================================");
 //        list.forEach(e-> System.out.println(e));
-        System.out.println("========================================================================");
-//        Assertions.assertThat(entity.getName()).isEqualTo("Monza");
+        //      System.out.println("========================================================================");
+        Assertions.assertThat(list).isNotNull();
 //        Assertions.assertThat(entity.getColor()).isEqualTo("Prata");
 //        Assertions.assertThat(entity.getMark()).isEqualTo("GM");
     }
 
-    @After
+    @Test
     public void delete() {
         repository.deleteAll();
         List<Car> list = repository.findAll();
-        System.out.println("D ========================================================================");
-        list.forEach(e-> System.out.println(e));
-        System.out.println("D ========================================================================");
+        System.out.println("\n\n==================== DELETE ===========================================");
         Assertions.assertThat(list.isEmpty()).isEqualTo(true);
     }
 }
