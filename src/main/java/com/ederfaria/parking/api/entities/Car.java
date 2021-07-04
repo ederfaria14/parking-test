@@ -82,7 +82,7 @@ public class Car implements Serializable {
 
     @Override
     public String toString() {
-        return "CarDTO{" + "id=" + id + ", name=" + name + ", color=" + color + ", plaque=" + plaque + ", mark=" + mark + '}';
+        return "Car {" + "id=" + id + ", name=" + name + ", color=" + color + ", plaque=" + plaque + ", mark=" + mark + '}';
     }
 
 }

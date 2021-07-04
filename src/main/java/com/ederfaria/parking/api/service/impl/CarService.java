@@ -14,12 +14,12 @@ import org.springframework.stereotype.Service;
  * @author eder
  */
 @Service
-public class JCarService implements ICarService {
+public class CarService implements ICarService {
 
     @Autowired
     private ICarRepository repository;
 
-    public JCarService() {
+    public CarService() {
     }
 
     @PostConstruct
