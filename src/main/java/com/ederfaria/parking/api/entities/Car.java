@@ -1,5 +1,6 @@
 package com.ederfaria.parking.api.entities;
 
+import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,27 +21,30 @@ public class Car implements Serializable {
 
     private static final long serialVersionUID = 0L;
 
+    @ApiModelProperty(value = "Id do carro")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-
+    @ApiModelProperty(value = "Nome do carro")
     @NotEmpty(message = "Name can't be empty")
     @NotNull(message = "Name can't be null")
     @Column(name = "_name", nullable = false, length = 250)
     private String name;
 
-
+    @ApiModelProperty(value = "Cor do carro")
     @NotEmpty(message = "Name can't be empty")
     @NotNull(message = "Number can't be null")
     @Column(name = "color", nullable = false, length = 50)
     private String color;
 
+    @ApiModelProperty(value = "Placa")
     @NotEmpty(message = "Plaque can't be empty")
     @NotNull(message = "Plaquecan't be null")
     @Column(name = "plaque", nullable = false, length = 50)
     private String plaque;
 
+    @ApiModelProperty(value = "Marca de fabricação")
     @NotEmpty(message = "Mark can't be empty")
     @NotNull(message = "Mark can't be null")
     @Column(name = "mark", nullable = false, length = 50)
