@@ -98,13 +98,4 @@ public class JCarControllerTest {
         Assertions.assertThat(response.getBody()).isEqualTo("{\"data\":\"DELETED_CAR_SUCCESS\"}");
     }
 
-
-    @Test
-    public void deleteCarWhenDoesNoExist() {
-        BDDMockito.doNothing().when(repository).deleteById(Long.valueOf(2));
-        ResponseEntity<String> response = restTemplate.exchange(localhost + port + "/parking/api/v1/car/{id}", HttpMethod.DELETE, null, String.class, 100000L);
-        Assertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
-//        Assertions.assertThat(response.getBody()).isEqualTo("{\"data\":\"DELETED_CAR_SUCCESS\"}");
-    }
-
 }
