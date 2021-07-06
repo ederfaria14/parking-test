@@ -48,38 +48,18 @@ public class JCarRepositoryTest {
     }
 
     @Test
-    public void notCreate() {
-        System.out.println("\n\n===================== NOT CREATE=======================================");
-        Car entity = new Car(null, null, null, null);
-        entity = repository.save(entity);
-
-//        if (entity != null && entity.getId() != null) {
-  //          Car carById = repository.readById(entity.getId());
-    //        Assertions.assertThat(carById).isNull();
-    //    }
-
-        //Assertions.assertThat(entity).isNull();
-//        Assertions.assertThat(entity.getName()).isEqualTo("Monza");
-//        Assertions.assertThat(entity.getColor()).isEqualTo("Prata");
-//        Assertions.assertThat(entity.getMark()).isEqualTo("GM");
-    }
-
-    @Test
     public void read() {
         System.out.println("\n\n===================== READ ============================================");
         List<Car> list = repository.findAll();
-//        list.forEach(e-> System.out.println(e));
-        //      System.out.println("========================================================================");
+        list.forEach(e-> System.out.println(e));
         Assertions.assertThat(list).isNotNull();
-//        Assertions.assertThat(entity.getColor()).isEqualTo("Prata");
-//        Assertions.assertThat(entity.getMark()).isEqualTo("GM");
     }
 
     @Test
     public void delete() {
         repository.deleteAll();
         List<Car> list = repository.findAll();
-        System.out.println("\n\n==================== DELETE ===========================================");
+        System.out.println("\n\n===================== DELETE ===========================================");
         Assertions.assertThat(list.isEmpty()).isEqualTo(true);
     }
 }

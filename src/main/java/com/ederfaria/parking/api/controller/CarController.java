@@ -7,9 +7,11 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -78,11 +80,17 @@ public class CarController {
     @DeleteMapping("/{id}")
     public ResponseEntity<JResponseStatus<String>> delete(@PathVariable("id") Long id) {
         System.out.println("--------- Delete Car Controller - " + id);
-        repository.deleteById(id);
 
         JResponseStatus<String> response = new JResponseStatus<>();
-        response.setData("DELETED_CAR_SUCCESS");
-        return ResponseEntity.ok(response);
+        List<Car> list = repository.findAll();
+        Optional<Car> option = list.stream().filter(c -> c.getId() == id).findFirst();
+        if (option != null) {
+            repository.deleteById(id);
+            response.setData("DELETED_CAR_SUCCESS");
+            return ResponseEntity.ok(response);
+        }
+        response.setData("CAR_NOT_FOUND");
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(response);
     }
 
 }
